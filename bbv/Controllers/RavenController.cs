@@ -4,6 +4,7 @@ using Raven.Client;
 using Raven.Client.Document;
 using Raven.Client.Indexes;
 using bbv.Infrastructure;
+using bbv.Infrastructure.Indexes;
 
 namespace bbv.Controllers
 {
@@ -15,13 +16,19 @@ namespace bbv.Controllers
 		}
 
 		private static readonly Lazy<IDocumentStore> documentStore =
-			new Lazy<IDocumentStore>(() => new DocumentStore
+			new Lazy<IDocumentStore>(() =>
 				{
-					Url = "http://localhost:8080",
-					DefaultDatabase = "bbv"
-				}
-				                               .RegisterListener(new AuditListener())
-				                               .Initialize());
+					var store = new DocumentStore
+						{
+							Url = "http://localhost:8080",
+							DefaultDatabase = "bbv"
+						}
+						.RegisterListener(new AuditListener())
+						.Initialize();
+
+					IndexCreation.CreateIndexes(typeof(Students_Search).Assembly, store);
+					return store;
+				});
 
 		public static IDocumentStore DocumentStore
 		{

@@ -1,4 +1,5 @@
-﻿using Raven.Client;
+﻿using System.Diagnostics;
+using Raven.Client;
 using bbv.Models;
 using Raven.Client.Linq;
 using System.Linq;
@@ -9,9 +10,14 @@ namespace bbv.Controllers
     {
          public object GetCourseByName(string name)
          {
+	         var sp = Stopwatch.StartNew();
              var result = Session.Query<Course>().Where(c => c.Name == name);
 
-             return Json(result);
+             return Json(new
+	             {
+		             Time = sp.ElapsedMilliseconds,
+					 Results = result
+	             });
          }
 
          public object GetUserByHobby(string hobby)

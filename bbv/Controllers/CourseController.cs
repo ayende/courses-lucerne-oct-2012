@@ -4,16 +4,28 @@ namespace bbv.Controllers
 {
 	public class CourseController : RavenController
 	{
-		 public object New(string name)
-		 {
-			 var course = new Course
-				 {
-					 Name = name
-				 };
+		public object Lot()
+		{
+			for (int i = 0; i < 1000 * 100; i++)
+			{
+				Session.Store(new Course
+					{
+						Name = "Course" + i
+					});
+			}
+			return Json("Ouch");
+		}
+
+		public object New(string name)
+		{
+			var course = new Course
+				{
+					Name = name
+				};
 
 			Session.Store(course);
 
-			 return Json(course.Id);
-		 }
+			return Json(course.Id);
+		}
 	}
 }
