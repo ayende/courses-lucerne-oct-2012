@@ -9,7 +9,7 @@ namespace bbv.Controllers
     {
          public object GetCourseByName(string name)
          {
-             IRavenQueryable<Course> result = Session.Query<Course>().Where(c => c.Name == name);
+             var result = Session.Query<Course>().Where(c => c.Name == name);
 
              return Json(result);
          }
@@ -23,7 +23,7 @@ namespace bbv.Controllers
 
          public object GetStudentByFirstOrLastName(string name)
          {
-             IRavenQueryable<Student> result = Session.Query<Student>().Where(s => s.FirstName == name || s.LastName == name);
+             var result = Session.Query<Student>().Where(s => s.FirstName == name || s.LastName == name);
 
              return Json(result);
          }
