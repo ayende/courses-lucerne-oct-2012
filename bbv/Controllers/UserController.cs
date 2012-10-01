@@ -5,15 +5,15 @@ namespace bbv.Controllers
 {
     public class UserController : RavenController
     {
-         public object New(string name, string email, string nicks, string hobbies)
+         public object New(string name, string email, string[] nicks, string[] hobbies)
          {
              var user = new User
                             {
                                 Name = name,
                                 Email = email,
                             };
-             user.Nicks.AddRange(nicks.Split(new []{","}, StringSplitOptions.RemoveEmptyEntries));
-             user.Hobbies.AddRange(hobbies.Split(new []{","}, StringSplitOptions.RemoveEmptyEntries));
+             user.Nicks.AddRange(nicks);
+             user.Hobbies.AddRange(hobbies);
              
              Session.Store(user);
 
