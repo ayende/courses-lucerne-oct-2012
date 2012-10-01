@@ -3,6 +3,7 @@ using System.Web.Mvc;
 using Raven.Client;
 using Raven.Client.Document;
 using Raven.Client.Indexes;
+using bbv.Infrastructure;
 
 namespace bbv.Controllers
 {
@@ -15,10 +16,12 @@ namespace bbv.Controllers
 
 		private static readonly Lazy<IDocumentStore> documentStore =
 			new Lazy<IDocumentStore>(() => new DocumentStore
-				                         {
-					                         Url = "http://localhost:8080",
-											 DefaultDatabase = "bbv"
-				                         }.Initialize());
+				{
+					Url = "http://localhost:8080",
+					DefaultDatabase = "bbv"
+				}
+				                               .RegisterListener(new AuditListener())
+				                               .Initialize());
 
 		public static IDocumentStore DocumentStore
 		{
