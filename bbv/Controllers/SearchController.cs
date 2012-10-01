@@ -46,5 +46,30 @@ namespace bbv.Controllers
 
 			 return Json(results);
 		 }
+
+        public object SearchRevenues(decimal value)
+        {
+            var query = Session.Query<Orders_Search.RevenueResult, Orders_Search>()
+                .Where(x => x.Revenue > value)
+                .As<Order>();
+
+            var results = query
+                .ToList();
+
+            return Json(results); 
+        }
+        
+        public object CreateOrders()
+        {
+            for (int i = 0; i < 100; i++)
+            {
+                var order = new Order {
+                                          Cost = 1,
+                                          Participants = i
+                                      };
+                Session.Store(order);
+            }
+            return Json("Done");
+        }
 	}
 }
