@@ -1,4 +1,5 @@
-﻿using bbv.Infrastructure.Indexes;
+﻿using Raven.Client.Linq;
+using bbv.Infrastructure.Indexes;
 using bbv.Models;
 using Raven.Client;
 using System.Linq;
@@ -7,10 +8,15 @@ namespace bbv.Controllers
 {
 	public class SearchController : RavenController
 	{
-		 public object Magic(string q)
+		 public object Magic(string q, bool geek)
 		 {
-			 var query = Session.Query<Students_Search.SearchResult, Students_Search>()
-				 .Search(x => x.Query, q)
+			 IQueryable<Students_Search.SearchResult> querySearchResults =
+				Session.Query<Students_Search.SearchResult, Students_Search>();
+
+			if(geek)
+				querySearchResults = querySearchResults.Where(x => x.Geek);
+
+			var query = querySearchResults.Search(x => x.Query, q)
 				 .As<Student>();
 
 			 var results = query
@@ -25,7 +31,7 @@ namespace bbv.Controllers
 					case 0:
 						 return Json("No idea what to do now...");
 					case 1:
-						 return Magic(sugguestions.Suggestions[0]);
+						 return Magic(sugguestions.Suggestions[0], geek);
 					case 2: case 3: case 4:
 						 return Json(new
 							 {
@@ -49,8 +55,7 @@ namespace bbv.Controllers
 
         public object SearchRevenues(decimal value)
         {
-            var query = Session.Query<Orders_Search.RevenueResult, Orders_Search>()
-                .Where(x => x.Revenue > value)
+            var query = Queryable.Where(Session.Query<Orders_Search.RevenueResult, Orders_Search>(), x => x.Revenue > value)
                 .As<Order>();
 
             var results = query
