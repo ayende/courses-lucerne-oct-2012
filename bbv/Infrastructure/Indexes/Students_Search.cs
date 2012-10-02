@@ -9,6 +9,7 @@ namespace bbv.Infrastructure.Indexes
 		public class SearchResult
 		{
 			public string Query { get; set; }
+			public bool Geek { get; set; }
 		}
 
 		public Students_Search()
@@ -21,8 +22,9 @@ namespace bbv.Infrastructure.Indexes
 							                  s.FirstName,
 							                  s.LastName,
 							                  s.Email,
-							                  s.Email.Split('@')
-						                  }
+							                  s.Email.Split('@'),
+						                  },
+									  s.Geek
 				                  };
 		}
 	}
