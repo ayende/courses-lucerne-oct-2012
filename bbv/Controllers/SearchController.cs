@@ -5,7 +5,9 @@ using System.Linq;
 
 namespace bbv.Controllers
 {
-	public class SearchController : RavenController
+    using Raven.Client.Linq;
+
+    public class SearchController : RavenController
 	{
 		 public object Magic(string q)
 		 {
@@ -49,8 +51,7 @@ namespace bbv.Controllers
 
         public object SearchRevenues(decimal value)
         {
-            var query = Session.Query<Orders_Search.RevenueResult, Orders_Search>()
-                .Where(x => x.Revenue > value)
+            var query = Queryable.Where(this.Session.Query<Orders_Search.RevenueResult, Orders_Search>(), x => x.Revenue > value)
                 .As<Order>();
 
             var results = query
@@ -70,6 +71,14 @@ namespace bbv.Controllers
                 Session.Store(order);
             }
             return Json("Done");
+        }
+
+        public object StudentsByEmailDomain(string emailDomain)
+        {
+            var results = Session.Query<Students_ByEmailDomain.Result, Students_ByEmailDomain>()
+                        .Where(x => x.EmailDomain == emailDomain);
+
+            return Json(results);
         }
 	}
 }

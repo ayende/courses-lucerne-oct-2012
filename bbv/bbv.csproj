@@ -124,6 +124,7 @@
     </Compile>
     <Compile Include="Infrastructure\AuditListener.cs" />
     <Compile Include="Infrastructure\Indexes\Orders_Search.cs" />
+    <Compile Include="Infrastructure\Indexes\Students_ByEmailDomain.cs" />
     <Compile Include="Infrastructure\Indexes\Students_Search.cs" />
     <Compile Include="Models\Course.cs" />
     <Compile Include="Models\Order.cs" />
