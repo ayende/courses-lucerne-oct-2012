@@ -116,6 +116,7 @@
     <Compile Include="Controllers\ConsistencyController.cs" />
     <Compile Include="Controllers\CourseController.cs" />
     <Compile Include="Controllers\FacetController.cs" />
+    <Compile Include="Controllers\MmrController.cs" />
     <Compile Include="Controllers\QueryController.cs" />
     <Compile Include="Controllers\RavenController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
