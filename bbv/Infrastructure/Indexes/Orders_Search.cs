@@ -10,7 +10,7 @@ namespace bbv.Infrastructure.Indexes
 	{
 		public class RevenueResult
 		{
-			public decimal Revenue { get; set; }
+			public decimal Total { get; set; }
 		}
 
 		public Orders_Search()
@@ -18,7 +18,7 @@ namespace bbv.Infrastructure.Indexes
 			Map = orders => from o in orders
 							select new RevenueResult
 								 {
-									 Revenue = (o.Cost * o.Participants)
+									 Total = o.Lines.Sum(x=>x.Qty * x.Cost)
 								 };
 		}
 	}

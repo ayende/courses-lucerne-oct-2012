@@ -55,7 +55,7 @@ namespace bbv.Controllers
 
         public object SearchRevenues(decimal value)
         {
-            var query = Queryable.Where(Session.Query<Orders_Search.RevenueResult, Orders_Search>(), x => x.Revenue > value)
+            var query = Queryable.Where(Session.Query<Orders_Search.RevenueResult, Orders_Search>(), x => x.Total > value)
                 .As<Order>();
 
             var results = query
@@ -69,7 +69,6 @@ namespace bbv.Controllers
             for (int i = 0; i < 100; i++)
             {
                 var order = new Order {
-                                          Cost = 1,
                                           Participants = i
                                       };
                 Session.Store(order);
