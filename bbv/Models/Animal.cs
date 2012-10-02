@@ -8,4 +8,12 @@
 		public int Age { get; set; }
 	}
 
+    public class Cat : Animal
+    {
+    }
+
+    public class Dog : Animal
+    {
+    }
+
 }
