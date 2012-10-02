@@ -11,12 +11,11 @@ namespace bbv.Controllers
 		{
 			DocumentStore.DatabaseCommands.UpdateByIndex(
 				"Raven/DocumentsByEntityName",
-				new IndexQuery{Query = "Tag:Students"}, 
+				new IndexQuery{Query = "Tag:Animals"}, 
 				new ScriptedPatchRequest
 					{
 						Script = @"
-						if(/bbv.ch/.test(this.Email))
-							this.BBV= true;
+						this.Age =(Math.random() * 6 | 0) + 1;
 						"
 					}
 				);

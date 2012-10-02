@@ -21,7 +21,12 @@ namespace bbv.Controllers
 					var store = new DocumentStore
 						{
 							Url = "http://localhost:8080",
-							DefaultDatabase = "bbv"
+							DefaultDatabase = "bbv",
+							LastEtagHolder = new UserLastEtagHolder(),
+							Conventions =
+								{
+									DefaultQueryingConsistency = ConsistencyOptions.QueryYourWrites
+								}
 						}
 						.RegisterListener(new AuditListener())
 						.Initialize();
