@@ -11,5 +11,10 @@
         public string Id { get; set; }
 
 	    public bool Geek { get; set; }
+
+		public string[] Tags { get; set; }
+
+	    public string[] CourseIds { get; set; }
+
     }
 }

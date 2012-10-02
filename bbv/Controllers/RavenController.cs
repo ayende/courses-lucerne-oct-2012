@@ -5,6 +5,7 @@ using Raven.Client.Document;
 using Raven.Client.Indexes;
 using bbv.Infrastructure;
 using bbv.Infrastructure.Indexes;
+using bbv.Models;
 
 namespace bbv.Controllers
 {
@@ -22,10 +23,14 @@ namespace bbv.Controllers
 						{
 							Url = "http://localhost:8080",
 							DefaultDatabase = "bbv",
-							LastEtagHolder = new UserLastEtagHolder(),
 							Conventions =
 								{
-									DefaultQueryingConsistency = ConsistencyOptions.QueryYourWrites
+									//FindTypeTagName = type =>
+									//	{
+									//		if (type.IsSubclassOf(typeof(Animal)))
+									//			return "Animals";
+									//		return DocumentConvention.DefaultTypeTagName(type);
+									//	}
 								}
 						}
 						.RegisterListener(new AuditListener())

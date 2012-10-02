@@ -126,6 +126,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Infrastructure\AuditListener.cs" />
+    <Compile Include="Infrastructure\Indexes\Animals_MultiMap.cs" />
     <Compile Include="Infrastructure\Indexes\Animals_Stats.cs" />
     <Compile Include="Infrastructure\Indexes\Orders_Search.cs" />
     <Compile Include="Infrastructure\Indexes\Students_ByEmailDomain.cs" />
